@@ -1,8 +1,6 @@
 const canvas = document.getElementById("tetris")
 const context = canvas.getContext("2d")
 
-context.fillStyle = "#000"
-context.fillRect(0, 0, canvas.width, canvas.height)
 
 context.scale(20, 20)
 
@@ -12,6 +10,15 @@ const matrix = [
     [0, 1, 0],
 ]
 
+function draw() {
+
+	context.fillStyle = "#000"
+	context.fillRect(0, 0, canvas.width, canvas.height)
+    
+    drawMatrix(player.matrix, player.pos)
+
+}
+
 
 function drawMatrix(matrix, offset) {
 
@@ -19,12 +26,59 @@ function drawMatrix(matrix, offset) {
         row.forEach((value, x) => {
             if (value != 0) {
                 context.fillStyle = 'red'
-                context.fillRect(x + offset.x,
-                    			 y + offset.y, 
-                    			 1, 1)
+                context.fillRect(	x + offset.x,
+      				              	y + offset.y,
+                    				1, 1)
             }
         })
     })
 }
 
-drawMatrix(matrix,{x:5, y:5})
+function update(){
+	draw()
+	requestAnimationFrame(update)
+}
+
+const player = {
+    pos: { x: 5, y: 5 },
+    matrix: matrix
+}
+
+update()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
